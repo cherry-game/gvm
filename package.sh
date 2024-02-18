@@ -30,7 +30,7 @@ function get_os() {
 }
 
 function package() {
-    printf "============Pakcage for %s============\n" $2
+    printf "============Package for %s============\n" $2
     local release=${1}
     local osarch=(${2//_/ })
     local os=${osarch[0]}

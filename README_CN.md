@@ -1,4 +1,4 @@
-# g
+# gvm
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/voidint/g)
 [![GoDoc](https://godoc.org/github.com/voidint/g?status.svg)](https://godoc.org/github.com/voidint/g)
@@ -104,7 +104,7 @@ $ g ls-remote stable
 
 ```shell
 $ g install 1.14.7
-Downloading 100% [===============] (92/92 MB, 12 MB/s)               
+Downloading 100% [===============] (92/92 MB, 12 MB/s)
 Computing checksum with SHA256
 Checksums matched
 Now using go1.20.5
@@ -156,7 +156,7 @@ Uninstalled go1.19.10
 清空 go 安装包文件缓存
 
 ```shell
-$ g clean 
+$ g clean
 Remove go1.18.10.darwin-arm64.tar.gz
 Remove go1.19.10.darwin-arm64.tar.gz
 Remove go1.20.5.darwin-arm64.tar.gz
@@ -225,7 +225,7 @@ Remove /Users/voidint/.g
 - 使用 g 安装了某个 go 版本后，执行`go version`命令，但输出的 go 版本号并非是所安装的那个版本，这是不是 bug ？
 
   由于当前 shell 环境中`PATH`环境变量设置有误导致（建议执行`which go`查看二进制文件所在路径）。在未修改 g 家目录的情况下，二进制文件 go 的路径应该是`~/.g/go/bin/go`，如果不是这个路径，就说明`PATH`环境变量设置有误。
-  
+
 - 支持源代码编译安装吗？
 
   不支持
