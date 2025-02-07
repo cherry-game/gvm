@@ -34,7 +34,12 @@
   ```shell
   # 建议安装前清空`GOROOT`、`GOBIN`等环境变量
   $ curl -sSL https://raw.githubusercontent.com/voidint/g/master/install.sh | bash
-  $ echo "unalias g" >> ~/.bashrc # 可选。若其他程序（如'git'）使用了'g'作为别名。
+  $ cat << 'EOF' >> ~/.bashrc
+  # 可选。检查g别名是否被占用
+  if [[ -n $(alias g 2>/dev/null) ]]; then
+      unalias g
+  fi
+  EOF 
   $ source "$HOME/.g/env"
   ```
 
@@ -194,9 +199,11 @@ Remove /Users/voidint/.g
 
   由于中国大陆无法自由访问 Golang 官网，导致查询及下载 go 版本都变得困难，因此可以通过该环境变量指定一个或多个镜像站点（多个镜像站点之间使用英文逗号分隔），g 将从该站点查询、下载可用的 go 版本。已知的可用镜像站点如下：
 
-  - Go 官方镜像站点：https://golang.google.cn/dl/
-  - Go 语言中文网：https://studygolang.com/dl
-  - 阿里云开源镜像站点：https://mirrors.aliyun.com/golang/
+  - Go 官方镜像站：https://golang.google.cn/dl/
+  - 阿里云开源镜像站：https://mirrors.aliyun.com/golang/
+  - 南京大学开源镜像站：https://mirrors.nju.edu.cn/golang/
+  - 华中科技大学开源镜像站：https://mirrors.hust.edu.cn/golang/
+  - 中国科学技术大学开源镜像站：https://mirrors.ustc.edu.cn/golang/
 
 - 环境变量`G_EXPERIMENTAL`有什么作用？
 

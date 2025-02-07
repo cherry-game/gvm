@@ -15,7 +15,7 @@ function get_arch() {
         ;;
     "armv6l" | "armv7l")
         echo "arm"
-	;;
+        ;;
     "s390x")
         echo "s390x"
         ;;
@@ -29,8 +29,8 @@ function get_os() {
     echo $(uname -s | awk '{print tolower($0)}')
 }
 
-main() {
-    local release="1.6.0"
+function main() {
+    local release="1.7.0"
     local os=$(get_os)
     local arch=$(get_arch)
     local dest_file="${HOME}/.g/downloads/g${release}.${os}-${arch}.tar.gz"
@@ -58,25 +58,21 @@ export PATH="${HOME}/.g/bin:${GOROOT}/bin:${GOPATH}/bin:$PATH"
 export G_MIRROR=https://golang.google.cn/dl/
 	EOF
 
-
     if [ -x "$(command -v bash)" ]; then
         cat >>${HOME}/.bashrc <<-'EOF'
-# g shell setup
-if [ -f "${HOME}/.g/env" ]; then
-    . "${HOME}/.g/env"
-fi
+
+[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
+
 		EOF
     fi
 
     if [ -x "$(command -v zsh)" ]; then
         cat >>${HOME}/.zshrc <<-'EOF'
-# g shell setup
-if [ -f "${HOME}/.g/env" ]; then
-    . "${HOME}/.g/env"
-fi
+
+[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
+
 		EOF
     fi
-
 
     echo -e "\nTo configure your current shell, run:\nsource \"$HOME/.g/env\""
 

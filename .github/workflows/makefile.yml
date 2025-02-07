@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.20.11'
+          go-version: 'stable'
           cache: false
         
       - name: Checkout Source
@@ -32,21 +32,25 @@ jobs:
           args: -exclude=G107,G204,G304,G401,G505 -quiet ./...
           
       - name: Run staticcheck
-        uses: dominikh/staticcheck-action@v1.3.0
+        uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
+          install-go: false
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v6
         with:
-          version: v1.54
+          version: "latest"
 
       - name: Run coverage
         run: make test-coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
-          files: ./coverage.txt
-          flags: unittests 
-          fail_ci_if_error: true
-          verbose: true 
+          fail_ci_if_error: true # optional (default = false)
+          files: ./coverage.txt # optional
+          flags: unittests # optional
+          token: ${{ secrets.CODECOV_TOKEN }} # required
+          verbose: true # optional (default = false)
              

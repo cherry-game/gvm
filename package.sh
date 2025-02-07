@@ -42,10 +42,10 @@ function package() {
     printf "[2/2] Package\n"
     if [ ${os} == "windows" ]; then
         zip g${release}.${os}-${arch}.zip ./g.exe
-        shasum -a 256 g${release}.${os}-${arch}.zip >> sha256sum.txt
+        shasum -a 256 g${release}.${os}-${arch}.zip >>sha256sum.txt
     else
         tar -czv -f g${release}.${os}-${arch}.tar.gz ./g
-        shasum -a 256 g${release}.${os}-${arch}.tar.gz >> sha256sum.txt
+        shasum -a 256 g${release}.${os}-${arch}.tar.gz >>sha256sum.txt
     fi
 }
 
@@ -54,7 +54,7 @@ main() {
     export GO111MODULE="on"
     export GOPROXY="https://goproxy.cn,direct"
 
-    local release="1.6.0"
+    local release="1.7.0"
 
     for item in "darwin_amd64" "darwin_arm64" "linux_386" "linux_amd64" "linux_arm" "linux_arm64" "linux_s390x" "windows_386" "windows_amd64" "windows_arm" "windows_arm64"; do
         package ${release} ${item}
